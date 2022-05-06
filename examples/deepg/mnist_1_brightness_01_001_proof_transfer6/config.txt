@@ -1,0 +1,16 @@
+dataset               mnist
+noise                 0
+chunks                6
+inside_splits         5
+method                baseline
+pixel_transform       Brightness(0.9,1.1,-0.01,0.01)
+spatial_transform     Rotation(-2,2)
+num_tests             100
+ub_estimate           Triangle
+num_attacks           0
+poly_eps              0.0001
+num_threads           16
+max_coeff             30
+lp_samples            1000
+num_poly_check        0
+set                   test
