@@ -42,14 +42,14 @@ This file can be used to setup a [conda](https://conda.io) environment with all 
 conda env create -f ./environment.yml
 conda activate cav_proof_sharing
 ```
-For some data generation [steps](#Precomputed Results) also the [Gurobi](https://www.gurobi.com) solver is required.
+For some data generation [steps](#precomputed-results) also the [Gurobi](https://www.gurobi.com) solver is required.
 While setup script installs Gurobi as required, it requires a licence. Free licences for academic use are available.
 
 For the CAV artifact evaluation we provide a [reference setup in Docker](#Docker), that may be useful beyond the artifact evaluation.
 
 While our code is compatible with GPU computations, here we only evaluate settings using a CPU.
 Our hardware requirements are modest (any modern CPU; preferably with AVX2 and <= 4 GB of RAM), with the exception of the computation of
-the optional [offline proof templates](#Precomputed Results) utilized by the experiments for Appendix C. For these we recommend >= 32 GB of RAM.
+the optional [offline proof templates](#precomputed-results) utilized by the experiments for Appendix C. For these we recommend >= 32 GB of RAM.
 This computation is not required as we provide precomputed results.
 
 ### Example Usage
