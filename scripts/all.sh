@@ -13,7 +13,7 @@ echo ""
 echo "You are about to start the experiments for 15, which are very expensive."
 echo "To reduce the runtime, here we just us 5 samples rather than 2000, as discussed in README.md."
 echo "This allows to judge whether the code works, but does not produce the results form the paper."
-echo "To run the full original experiment, invoke ./script/table15.sh after cleaning `results`."
+echo "To run the full original experiment, invoke ./script/table15.sh after removing results folder (or all fils in it stating with "linf")."
 echo "Press enter to continue."
 echo ""
 read

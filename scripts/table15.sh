@@ -22,7 +22,7 @@ do
 		if test -f "$fn"; then
 			echo "$fn exists; skipping."
 		else
-			python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --label ${label} --dataset mnist --num_tests $nt --relu_transformer box |& tee "$fn"
+			python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --label ${label} --dataset mnist --num_tests $nt --relu_transformer box > "$fn" 2>&1
 		fi
 
 		for num_templates in 1 3 25
@@ -41,7 +41,7 @@ do
 					elif [[ "$layer" == "2 3" ]]; then
 						template="5x100_DiffAI_templates_7_${label}_box_exact_try5_s3.pkl 5x100_DiffAI_templates_9_${label}_box_exact_try5_s3.pkl"
 					fi
-					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer} --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} |& tee "$fn"
+					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer} --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} > "$fn" 2>&1
 				fi
 
 				# Without halfspace-constraints with widening
@@ -56,7 +56,7 @@ do
 					elif [[ "$layer" == "2 3" ]]; then
 						template="5x100_DiffAI_templates_7_${label}_box_exact_try5_w3.pkl 5x100_DiffAI_templates_9_${label}_box_exact_try5_w3.pkl"
 					fi
-					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} |& tee "$fn"
+					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template}  > "$fn" 2>&1
 				fi
 
 				# With halfspace-constraints without widening
@@ -71,7 +71,7 @@ do
 					elif [[ "$layer" == "2 3" ]]; then
 						template="5x100_DiffAI_templates_7_${label}_box_exact_s3.pkl 5x100_DiffAI_templates_9_${label}_box_exact_s3.pkl"
 					fi
-					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} |& tee "$fn"
+					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} > "$fn" 2>&1
 				fi
 
 				# With halfspace-constraints with widening
@@ -86,7 +86,7 @@ do
 					elif [[ "$layer" == "2 3" ]]; then
 						template="5x100_DiffAI_templates_7_${label}_box_exact_w3.pkl 5x100_DiffAI_templates_9_${label}_box_exact_w3.pkl"
 					fi
-					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} |& tee "$fn"
+					python . -l --netname 5x100_DiffAI.pyt --epsilon ${epsilon} --template_layers ${layer}  --label ${label} --dataset mnist --num_tests $nt --relu_transformer box --num_templates ${num_templates} --template_dir ${template} > "$fn" 2>&1
 				fi
 			done
 
