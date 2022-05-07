@@ -1,10 +1,11 @@
-# Shared Certificates for Neural Network Verification <a href="https://www.sri.inf.ethz.ch/"><img width="80" alt="SRI logo" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
+<a href="https://www.sri.inf.ethz.ch/"><img width="100" alt="SRI logo" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
+# Shared Certificates for Neural Network Verification 
 
 This repository contains the code for our CAV'22 paper "Shared Certificates for Neural Network Verification".
 At the same time this serves as our official artifact for evaluation.
 
 ## Abstract
-Existing neural network verifiers compute a proof that each input is handled correctly under a given perturbation by propagating a symbolic abstraction of reachable values at each layer. This process is repeated from scratch independently for each input (e.g., image) and perturbation (e.g., rotation), leading to an expensive overall proof effort when handling an entire dataset. In this work we introduce a new method for reducing this verification cost without losing precision based on a key insight that abstractions obtained at intermediate layers for different inputs and perturbations can overlap or contain each other. Leveraging our insight, we introduce the general concept of shared certificates, enabling proof effort reuse across multiple inputs to reduce overall verification costs. We perform an extensive experimental evaluation to demonstrate the effectiveness of shared certificates in reducing the verification cost on a range of datasets and attack specifications on image classifiers including the popular patch and geometric perturbations.
+Existing neural network verifiers compute a proof that each input is handled correctly under a given perturbation by propagating a symbolic abstraction of reachable values at each layer. This process is repeated from scratch independently for each input (e.g., image) and perturbation (e.g., rotation), leading to an expensive overall proof effort when handling an entire dataset. In this work, we introduce a new method for reducing this verification cost without losing precision based on a key insight that abstractions obtained at intermediate layers for different inputs and perturbations can overlap or contain each other. Leveraging our insight, we introduce the general concept of shared certificates, enabling proof effort reuse across multiple inputs to reduce overall verification costs. We perform an extensive experimental evaluation to demonstrate the effectiveness of shared certificates in reducing the verification cost on a range of datasets and attack specifications on image classifiers including the popular patch and geometric perturbations.
 
 ## Organization
 Here we briefly outline the structure of the repository and describe the function of individual files.
@@ -64,7 +65,7 @@ Example usage:
 ./scripts/all.sh
 ```
 
-Results are printed to screen, but also saved in `results`. For most tables the run time is between 30 min and 120 minutes. The full of evaluation of Table 15 as presented in the paper takes more than 20 hours. This version evaluates 2000 samples per class. Reducing this number can greatly speed up evaluation. To this end an argument can be supplied: `./script/table15.sh <cnt>`. If no argument `<cnt>` is supplied, 2000 samples are evaluated. By default `all.sh` only runs `5` samples.
+Results are printed to screen, but also saved in `results`. For most tables the run time is between 30 min and 120 minutes. The full evaluation of Table 15 as presented in the paper takes more than 20 hours. This version evaluates 2000 samples per class. Reducing this number can greatly speed up evaluation. To this end an argument can be supplied: `./script/table15.sh <cnt>`. If no argument `<cnt>` is supplied, 2000 samples are evaluated. By default `all.sh` only runs `5` samples.
 
 Each script states which results are in the corresponding tables are expected to be replicated exactly (by deterministic computation) and for which we expect the approximate trend to hold (due to dependence on timing, hardware, and randomness).
 
