@@ -46,7 +46,11 @@ def print_table(table_nr, timing, df):
         print('               Here the baseline is m=1 and m>1 is our method. Non-timing result ("splits matched") are deterministic and expected to be the same as in the paper.')
         print()
         print("Note: In the paper the column 't' is reported by a factor 10 too high. Here this is fixed. This does not change our claim, as also the baseline is off by the same factor.")
-    if table_nr == 15: print('               The non-timing results ("shapes matched") are deterministic and expected to be the same as in the paper if the same number sampes (2000 per class are used). If less are used, the same trend is expected.')
+    if table_nr == 15:
+        print('               The non-timing results ("shapes matched") are deterministic and expected to be the same as in the paper if the same number samples (2000 per class) are used.')
+        print('               If less are used (the default; see README.md) the "shapes matched" will trend towards the results in the paper as the number of samples increases.')
+        print('               For the timing results the rough trend between the baseline and the timing values in the tables should hold, although depending on the number of samples the absolute values may be much lower.')
+        print('               Reducing the number of samples by a large amount (e.g., to 5) will obscure many subtle tends.')
     print()
     print(df)
 
