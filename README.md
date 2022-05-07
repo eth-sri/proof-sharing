@@ -52,8 +52,10 @@ Our hardware requirements are modest (any modern CPU; preferably with AVX2 and <
 the optional [offline proof templates](#precomputed-results) utilized by the experiments for Appendix C. For these we recommend >= 32 GB of RAM.
 This computation is not required as we provide precomputed results.
 
-### Example Usage
-We provide a command line utility for neural network verification through `__main__.py` (`python .`) for details we refer to its arguments (`python . --help`) and see the usage examples in `scripts` (see [Results](#Results)). The code is modular and reusable can be easily adapted to other neural network certification problems (`relaxations.py`) and other neural network architectures (see `models.py`).
+### Example Usage & Extendability
+We provide a command line utility for neural network verification through `__main__.py` (`python .`) for details we refer to its arguments (`python . --help`) and see the usage examples in `scripts` (see [Results](#Results)). 
+
+The code can easily be extended to other certification problems (see behavior for different [switches](https://github.com/eth-sri/proof-sharing/blob/main/__main__.py#L92) in `__main__.py`), other neural network architectures (by adapting `network.py` and a load function as in `utils.py`) and new relaxations or proof sharing strategies by adapting (`relaxations.py` and `templates.py` respectively).
 
 ### Results
 All empirical results in our paper are presented in tables. In the `scripts` folder we offer scripts to replicate all tables in the paper. (Note that, table 2 does not contain empirical results.)
