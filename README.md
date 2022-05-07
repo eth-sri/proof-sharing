@@ -1,4 +1,4 @@
-# Shared Certificates for Neural Network Verification <a href="https://www.sri.inf.ethz.ch/"><img width="100" alt="portfolio_view" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
+# Shared Certificates for Neural Network Verification <a href="https://www.sri.inf.ethz.ch/"><img width="80" alt="SRI logo" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
 
 This repository contains the code for our CAV'22 paper "Shared Certificates for Neural Network Verification".
 At the same time this serves as our official artifact for evaluation.
