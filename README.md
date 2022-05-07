@@ -56,7 +56,7 @@ This computation is not required as we provide precomputed results.
 We provide a command line utility for neural network verification through `__main__.py` (`python .`) for details we refer to its arguments (`python . --help`) and see the usage examples in `scripts` (see [Results](#Results)). 
 
 ### Extendability
-The code can easily be extended to other certification problems (see behavior for different [switches](https://github.com/eth-sri/proof-sharing/blob/main/__main__.py#L92) in `__main__.py`), other neural network architectures (by adapting `network.py` and a load function as in `utils.py`) and new relaxations or proof sharing strategies by adapting (`relaxations.py` and `templates.py` respectively).
+At a high level, our code provides an implementation of common network verification algorithms as well as tools for proof sharing via templates. `__main__.py` shows multiple examples for how this library can be used for a broad range of verification tasks. The code can easily be extended to other certification problems (see behavior for different [switches](https://github.com/eth-sri/proof-sharing/blob/main/__main__.py#L92) in `__main__.py`), other neural network architectures (by adapting `network.py` and a load function as in `utils.py`) and new relaxations or proof sharing strategies by adapting (`relaxations.py` and `templates.py` respectively).
 
 ### Results
 All empirical results in our paper are presented in tables. In the `scripts` folder we offer scripts to replicate all tables in the paper. (Note that, table 2 does not contain empirical results.)
