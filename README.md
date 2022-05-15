@@ -88,10 +88,10 @@ Our docker container can build and started by running `docker build` in this fol
 The minimal sequence of commands to obtain all results is:
 
 ```
-sudo ./docker_run.sh        # compilies and starts docker
+sudo ./docker/docker_run.sh        # compilies and starts docker
 ./scripts/all.sh            # run reproduce all results tables
 exit                        # stop docker & close docker
-# sudo ./docker_delete.sh   # optionally delete the docker container
+# sudo ./docker/docker_delete.sh   # optionally delete the docker container
 ```
 
 As an alternative to `all.sh`, individual scripts can be run.
