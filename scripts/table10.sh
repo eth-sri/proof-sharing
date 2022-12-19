@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "Computing results for Table 15"
+echo "Computing results for Table 10"
 echo ""
 
 dataset=mnist
@@ -96,4 +96,4 @@ do
 	done
 done
 
-python scripts/summarize_results.py --table 15 | tee results/table15.txt
+python scripts/summarize_results.py --table 10 | tee results/table10.txt

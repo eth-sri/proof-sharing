@@ -36,17 +36,17 @@ def print_table(table_nr, timing, df):
         print_explanation_timing()
     else:
         print_explanation_deterministic()
-    if table_nr in [5, 11]: print('               The non-timing result ("patches matched") is deterministic and expected to be the same as in the paper.')
-    if table_nr in [6, 12]: print('               The non-timing result ("verif. acc.", "patch mat.", "patch verif.") is deterministic and expected to be the same as in the paper.')
+    if table_nr == 5: print('               The non-timing result ("patches matched") is deterministic and expected to be the same as in the paper.')
+    if table_nr == 6: print('               The non-timing result ("verif. acc.", "patch mat.", "patch verif.") is deterministic and expected to be the same as in the paper.')
     if table_nr  == 7:
         print('               This table shows speed-ups over the baseline. As both the baseline runtime and the proof sharing runtime are timing results,')
         print('               difference is to be expected. The results are expected to show the same trend though.')
-    if table_nr in [8, 13]: print('               The non-timing result ("verif.", "splits verif.", "splits matched") is deterministic and expected to be the same as in the paper.')
-    if table_nr in [9, 14]:
+    if table_nr == 8: print('               The non-timing result ("verif.", "splits verif.", "splits matched") is deterministic and expected to be the same as in the paper.')
+    if table_nr == 9:
         print('               Here the baseline is m=1 and m>1 is our method. Non-timing result ("splits matched") are deterministic and expected to be the same as in the paper.')
         print()
         print("Note: In the paper the column 't' is reported by a factor 10 too high. Here this is fixed. This does not change our claim, as also the baseline is off by the same factor.")
-    if table_nr == 15:
+    if table_nr == 10:
         print('               The non-timing results ("shapes matched") are deterministic and expected to be the same as in the paper if the same number samples (2000 per class) are used.')
         print('               If less are used (the default; see README.md) the "shapes matched" will trend towards the results in the paper as the number of samples increases.')
         print('               For the timing results the rough trend between the baseline and the timing values in the tables should hold, although depending on the number of samples the absolute values may be much lower.')
@@ -100,7 +100,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--table', type=int, required=True, help='which table to create')
 args = parser.parse_args()
 
-assert args.table in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+assert args.table in [3, 4, 5, 6, 7, 8, 9, 10]
 
 if args.table == 3:
     n_layers = 7
@@ -121,7 +121,7 @@ if args.table == 3:
     table = 100*table
     print_table(args.table, False, table.round(1))
 
-elif args.table in [4, 10]:
+elif args.table == 4:
     datasets = ['mnist', 'cifar']
     net = '7x200'
     method = 'linfinity'
@@ -151,17 +151,14 @@ elif args.table in [4, 10]:
     df_mean = df.groupby('dataset').mean().sort_values('dataset', ascending=False)
     df_mean.drop(labels=['rep'], axis=1, inplace=True)
     df_mean = df_mean.round(2)
-    if args.table == 4:
-        print_table(args.table, True, df_mean)
-    elif args.table == 10:
-        df_std = df.groupby('dataset').std().sort_values('dataset', ascending=False)
-        df_std.drop(labels=['rep'], axis=1, inplace=True)
-        df_std = df_std.round(2)
-        df_mean = df_mean.astype(str) + ' +/- '
-        df_std = df_std.astype(str)
-        print_table(args.table, True, df_mean + df_std)
+    df_std = df.groupby('dataset').std().sort_values('dataset', ascending=False)
+    df_std.drop(labels=['rep'], axis=1, inplace=True)
+    df_std = df_std.round(2)
+    df_mean = df_mean.astype(str) + ' +/- '
+    df_std = df_std.astype(str)
+    print_table(args.table, True, df_mean + df_std)
 
-elif args.table in [5, 11]:
+elif args.table == 5:
     dataset = 'mnist'
     net = '7x200'
     method = 'linfinity'
@@ -190,18 +187,15 @@ elif args.table in [5, 11]:
     df_mean.time = df_mean.time.round(2)
     df_mean.index = df_mean.index.map(lambda x: methods[x])
     df_mean = df_mean[['m', 'patches matched', 'time']]
-    if args.table == 5:
-        print_table(args.table, True, df_mean)
-    elif args.table == 11:
-        df_std = df.groupby('method').std()
-        df_std.index = df_std.index.map(lambda x: methods[x])
-        df = df_mean.copy()
-        df_std.time = df_std.time.round(2).astype(str)
-        df.time = df_mean.time.astype(str) + ' +/- '
-        df.time = df.time + df_std.time
-        print_table(args.table, True, df)
+    df_std = df.groupby('method').std()
+    df_std.index = df_std.index.map(lambda x: methods[x])
+    df = df_mean.copy()
+    df_std.time = df_std.time.round(2).astype(str)
+    df.time = df_mean.time.astype(str) + ' +/- '
+    df.time = df.time + df_std.time
+    print_table(args.table, True, df)
 
-elif args.table in [6, 12]:
+elif args.table == 6:
     datasets = ['mnist', 'cifar']
     nets = ['7x200', '9x500']
     method = 'linfinity'
@@ -239,20 +233,17 @@ elif args.table in [6, 12]:
     df_mean['patch verif.'] *= 100
     df_mean['time BL']  = df_mean['time BL'].round(2)
     df_mean['time PS']  = df_mean['time PS'].round(2)
-    if args.table == 6:
-        print_table(args.table, True, df_mean)
-    elif args.table == 12:
-        df_std= df.groupby(['dataset', 'model']).std()
-        df = df_mean.copy()
-        df_std['time BL'] = df_std['time BL'].round(2).astype(str)
-        df_std['time PS'] = df_std['time PS'].round(2).astype(str)
-        df['time BL'] = df_mean['time BL'].astype(str) + ' +/- '
-        df['time BL'] = df['time BL'] + df_std['time BL']
-        df['time PS'] = df_mean['time PS'].astype(str) + ' +/- '
-        df['time PS'] = df['time PS'] + df_std['time PS']
-        print_table(args.table, True, df)
+    df_std= df.groupby(['dataset', 'model']).std()
+    df = df_mean.copy()
+    df_std['time BL'] = df_std['time BL'].round(2).astype(str)
+    df_std['time PS'] = df_std['time PS'].round(2).astype(str)
+    df['time BL'] = df_mean['time BL'].astype(str) + ' +/- '
+    df['time BL'] = df['time BL'] + df_std['time BL']
+    df['time PS'] = df_mean['time PS'].astype(str) + ' +/- '
+    df['time PS'] = df['time PS'] + df_std['time PS']
+    print_table(args.table, True, df)
 
-elif args.table in [7]:
+elif args.table == 7:
     n_layers = 4 
     net = '7x200'
     method = 'linfinity'
@@ -275,7 +266,7 @@ elif args.table in [7]:
     table.index = ['realized', 'optimal', 'optimal, no match.', 'optimal, no gen., no match.']
     print_table(args.table, True, table.round(2))
 
-elif args.table in [8, 13]:
+elif args.table == 8:
     dataset = 'mnist'
     net = '7x200'
     method = 'linfinity'
@@ -306,20 +297,17 @@ elif args.table in [8, 13]:
     df_mean.drop(labels=['rep'], axis=1, inplace=True)
     df_mean['time BL'] = df_mean['time BL'].round(2)
     df_mean['time PS'] = df_mean['time PS'].round(2)
-    if args.table == 8:
-        print_table(args.table, True, df_mean)
-    elif args.table == 13:
-        df_std= df.groupby(['r']).std()
-        df = df_mean.copy()
-        df_std['time BL'] = df_std['time BL'].round(2).astype(str)
-        df_std['time PS'] = df_std['time PS'].round(2).astype(str)
-        df['time BL'] = df_mean['time BL'].astype(str) + ' +/- '
-        df['time BL'] = df['time BL'] + df_std['time BL']
-        df['time PS'] = df_mean['time PS'].astype(str) + ' +/- '
-        df['time PS'] = df['time PS'] + df_std['time PS']
-        print_table(args.table, True, df)
+    df_std= df.groupby(['r']).std()
+    df = df_mean.copy()
+    df_std['time BL'] = df_std['time BL'].round(2).astype(str)
+    df_std['time PS'] = df_std['time PS'].round(2).astype(str)
+    df['time BL'] = df_mean['time BL'].astype(str) + ' +/- '
+    df['time BL'] = df['time BL'] + df_std['time BL']
+    df['time PS'] = df_mean['time PS'].astype(str) + ' +/- '
+    df['time PS'] = df['time PS'] + df_std['time PS']
+    print_table(args.table, True, df)
 
-elif args.table in [9, 14]:
+elif args.table == 9:
     dataset = 'mnist'
     net = '7x200'
     methods = ['base', 'l_infinity', 'rotation2_40', 'rotation3_40']
@@ -346,20 +334,17 @@ elif args.table in [9, 14]:
     df_mean = df.groupby('m').mean()
     df_mean.drop(labels=['rep'], axis=1, inplace=True)
     df_mean['t'] = df_mean['t'].round(2)
-    if args.table == 9:
-        print_table(args.table, True, df_mean)
-    elif args.table == 14:
-        df_std= df.groupby(['m']).std()
-        df = df_mean.copy()
-        df_std['t'] = df_std['t'].round(2).astype(str)
-        df['t'] = df_mean['t'].astype(str) + ' +/- '
-        df['t'] = df['t'] + df_std['t']
-        print_table(args.table, True, df)
+    df_std= df.groupby(['m']).std()
+    df = df_mean.copy()
+    df_std['t'] = df_std['t'].round(2).astype(str)
+    df['t'] = df_mean['t'].astype(str) + ' +/- '
+    df['t'] = df['t'] + df_std['t']
+    print_table(args.table, True, df)
     print('Samples verified', verified*100)
     print('Splits verified', p_verified*100)
 
 
-elif args.table == 15:
+elif args.table == 10:
     dataset = 'mnist'
     rep = [1, 2, 3]
     def print_linf_table(method, epsilon):

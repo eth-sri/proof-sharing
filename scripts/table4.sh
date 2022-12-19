@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "Computing results for Tables 4 & 10"
+echo "Computing results for Table 4"
 echo ""
 
 mkdir -p results
@@ -33,7 +33,6 @@ do
 done
 
 python scripts/summarize_results.py --table 4 | tee results/table4.txt
-python scripts/summarize_results.py --table 10 | tee results/table10.txt
 
 
 

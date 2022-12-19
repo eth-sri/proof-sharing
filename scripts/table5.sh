@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "Computing results for Tables 5 & 11"
+echo "Computing results for Table 5"
 echo ""
 
 
@@ -24,6 +24,5 @@ do
 done
 
 python scripts/summarize_results.py --table 5 | tee results/table5.txt
-python scripts/summarize_results.py --table 11 | tee results/table11.txt
 
 
